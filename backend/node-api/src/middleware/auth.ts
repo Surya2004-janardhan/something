@@ -1,13 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { verifyAccessToken, JwtPayload } from '../lib/jwt';
 
-export interface AuthRequest extends Request {
-  user?: JwtPayload;
-}
+export type { JwtPayload };
+export type AuthRequest = Request;
 
-export function authenticate(req: AuthRequest, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  const cookieToken = req.cookies?.access_token as string | undefined;
+export const authenticate: RequestHandler = (req, res, next) => {
+  const authReq = req as Request;
+  const authHeader = authReq.headers.authorization;
+  const cookieToken = authReq.cookies?.access_token as string | undefined;
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : cookieToken;
 
   if (!token) {
@@ -16,9 +16,9 @@ export function authenticate(req: AuthRequest, res: Response, next: NextFunction
   }
 
   try {
-    req.user = verifyAccessToken(token);
+    authReq.user = verifyAccessToken(token);
     next();
   } catch {
     res.status(401).json({ error: 'Invalid or expired token' });
   }
-}
+};

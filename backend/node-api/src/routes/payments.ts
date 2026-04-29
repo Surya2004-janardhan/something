@@ -6,7 +6,7 @@ import { authenticate, AuthRequest } from '../middleware/auth';
 const router = Router();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2024-04-10',
+  apiVersion: '2024-06-20',
 });
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';

@@ -27,9 +27,135 @@ model User {
 
   sessions     Session[]
   subscription Subscription?
+  agents       Agent[]
+  workflows    Workflow[]
+  runs         Run[]
+  auditLogs    AuditLog[]
+  usageDaily   UsageDaily[]
 
   @@unique([provider, providerId])
   @@map("users")
+}
+
+model AgentTemplate {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  category    String
+  prompt      String
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  agents Agent[]
+
+  @@map("agent_templates")
+}
+
+model Agent {
+  id           String   @id @default(uuid())
+  userId       String
+  templateId   String?
+  name         String
+  description  String?
+  systemPrompt String?
+  provider     String
+  model        String
+  temperature  Float    @default(0.7)
+  maxTokens    Int      @default(512)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template AgentTemplate? @relation(fields: [templateId], references: [id])
+  runs     Run[]
+
+  @@map("agents")
+}
+
+model Workflow {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  scheduleCron String?
+  scheduleInput String?
+  scheduleEnabled Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  steps WorkflowStep[]
+  runs  Run[]
+
+  @@map("workflows")
+}
+
+model WorkflowStep {
+  id         String   @id @default(uuid())
+  workflowId String
+  order      Int
+  agentId    String
+  config     Json
+  createdAt  DateTime @default(now())
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  agent    Agent    @relation(fields: [agentId], references: [id])
+
+  @@unique([workflowId, order])
+  @@map("workflow_steps")
+}
+
+model Run {
+  id          String   @id @default(uuid())
+  userId      String
+  type        String
+  status      String
+  jobId       String?
+  agentId     String?
+  workflowId  String?
+  input       Json?
+  output      Json?
+  error       String?
+  tokens      Int?
+  cost        Float?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agent    Agent?    @relation(fields: [agentId], references: [id])
+  workflow Workflow? @relation(fields: [workflowId], references: [id])
+
+  @@map("runs")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String
+  action     String
+  targetType String?
+  targetId   String?
+  meta       Json?
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+model UsageDaily {
+  id       String   @id @default(uuid())
+  userId   String
+  date     DateTime
+  requests Int      @default(0)
+  tokens   Int      @default(0)
+  cost     Float    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("usage_daily")
 }
 
 model Session {

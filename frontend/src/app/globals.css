@@ -1,0 +1,176 @@
+:root {
+  --bg: #06111f;
+  --bg-soft: rgba(10, 19, 36, 0.72);
+  --panel: rgba(12, 23, 43, 0.84);
+  --panel-strong: rgba(14, 29, 52, 0.96);
+  --line: rgba(175, 207, 255, 0.12);
+  --text: #edf4ff;
+  --muted: #90a6c9;
+  --accent-cyan: #59d7ff;
+  --accent-amber: #ffcb6b;
+  --accent-lime: #8df0b3;
+  --accent-sky: #7eb6ff;
+  --accent-rose: #ff8fb7;
+  --accent-violet: #b88cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(89, 215, 255, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(184, 140, 255, 0.14),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 70% 75%,
+      rgba(143, 240, 179, 0.08),
+      transparent 24%
+    ),
+    linear-gradient(180deg, #07101d 0%, #091424 45%, #060d18 100%);
+  color: var(--text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(89, 215, 255, 0.22);
+}
+
+.shell-grid {
+  position: relative;
+  min-height: 100vh;
+}
+
+.shell-grid::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at center, black 22%, transparent 85%);
+  opacity: 0.2;
+}
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 28, 49, 0.92),
+    rgba(9, 18, 34, 0.94)
+  );
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px);
+}
+
+.glow {
+  box-shadow:
+    0 0 0 1px rgba(89, 215, 255, 0.08),
+    0 0 80px rgba(89, 215, 255, 0.1);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badgeLive {
+  background: rgba(141, 240, 179, 0.16);
+  color: var(--accent-lime);
+}
+
+.badgeIdle {
+  background: rgba(89, 215, 255, 0.14);
+  color: var(--accent-cyan);
+}
+
+.badgeWarn {
+  background: rgba(255, 203, 107, 0.14);
+  color: var(--accent-amber);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.45rem 0.8rem;
+  color: var(--muted);
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #9bdcff 35%,
+    #d9b8ff 70%,
+    #9ef0d0
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.surface {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid var(--line);
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(165, 196, 255, 0.18);
+  border-radius: 999px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

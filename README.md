@@ -1,6 +1,6 @@
 # Agents — Microservices Platform
 
-A full-stack microservices platform built with **Python / Flask** backends and a **Next.js** frontend, fully containerised with Docker Compose.
+A full-stack microservices platform built with **Node.js / TypeScript** backends (with a small Node AI worker) and a **Next.js** frontend, fully containerised with Docker Compose. The system prefers Node/TypeScript; the AI worker is a dedicated Node service that calls multiple LLM providers.
 
 ## Architecture
 
@@ -84,3 +84,10 @@ agents/
     ├── notifications/ # Notifications microservice (Flask, port 5004)
     └── gateway/       # Nginx reverse-proxy
 ```
+
+## Notes
+
+- The AI LLM worker has been migrated to a Node-based `ai-worker` service (internal). The Node API (`node-api`) calls this internal worker at the URL provided in `AI_WORKER_URL`.
+- Supported LLM providers: OpenAI, Anthropic, Google Gemini, Mistral, Cohere, Groq, Together, Ollama (local), Azure, OpenRouter and custom OpenAI-compatible endpoints. Configure provider API keys in `.env`.
+- The platform uses Redis for caching, job status and rate-limiting; ensure `REDIS_URL` is set.
+

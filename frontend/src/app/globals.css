@@ -24,8 +24,16 @@ body {
   min-height: 100vh;
   color: var(--text);
   background:
-    radial-gradient(circle at 12% 8%, rgba(215, 155, 99, 0.16), transparent 20%),
-    radial-gradient(circle at 82% 12%, rgba(48, 80, 109, 0.12), transparent 22%),
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(215, 155, 99, 0.16),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(48, 80, 109, 0.12),
+      transparent 22%
+    ),
     radial-gradient(circle at 78% 82%, rgba(56, 107, 92, 0.1), transparent 24%),
     linear-gradient(180deg, #fbf6ef 0%, #f3ebe1 55%, #eadfce 100%);
   font-family:

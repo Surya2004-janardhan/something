@@ -5,14 +5,26 @@
 }
 
 .page::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 15% 10%, rgba(196, 120, 85, 0.14), transparent 20%),
-    radial-gradient(circle at 85% 0%, rgba(86, 124, 164, 0.14), transparent 18%),
-    radial-gradient(circle at 80% 78%, rgba(88, 146, 122, 0.12), transparent 22%),
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(196, 120, 85, 0.14),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(86, 124, 164, 0.14),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 80% 78%,
+      rgba(88, 146, 122, 0.12),
+      transparent 22%
+    ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 40%);
   opacity: 0.75;
 }
@@ -236,7 +248,11 @@
 }
 
 .navItemActive {
-  background: linear-gradient(135deg, rgba(47, 61, 84, 0.08), rgba(167, 96, 69, 0.09));
+  background: linear-gradient(
+    135deg,
+    rgba(47, 61, 84, 0.08),
+    rgba(167, 96, 69, 0.09)
+  );
   border-color: rgba(47, 61, 84, 0.18);
 }
 
@@ -344,7 +360,11 @@
   padding: 16px;
   border-radius: 20px;
   border: 1px solid rgba(54, 46, 39, 0.1);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(251, 246, 238, 0.94));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.78),
+    rgba(251, 246, 238, 0.94)
+  );
 }
 
 .statLabel {
@@ -390,7 +410,11 @@
 }
 
 .railCardAccent {
-  background: linear-gradient(180deg, rgba(47, 61, 84, 0.08), rgba(167, 96, 69, 0.12));
+  background: linear-gradient(
+    180deg,
+    rgba(47, 61, 84, 0.08),
+    rgba(167, 96, 69, 0.12)
+  );
 }
 
 .railAccentLabel {
@@ -535,7 +559,7 @@
 }
 
 .switch::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   left: 3px;

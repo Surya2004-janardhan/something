@@ -1,0 +1,242 @@
+.page {
+  display: grid;
+  gap: 18px;
+}
+
+.hero,
+.sectionCard,
+.summaryCard,
+.routeCard,
+.scheduleCard {
+  border: 1px solid rgba(54, 46, 39, 0.12);
+  border-radius: 28px;
+  background: rgba(249, 244, 236, 0.86);
+  box-shadow: 0 16px 40px rgba(47, 34, 23, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  padding: 24px;
+}
+
+.heroCopy {
+  display: grid;
+  gap: 14px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #6d5d54;
+  font-size: 0.86rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(56, 107, 92, 0.12);
+  color: #386b5c;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.title {
+.ghostButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.ghostButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton {
+  color: #fff9f2;
+  font-weight: 800;
+  background: linear-gradient(135deg, #30506d, #a45a3d 72%, #d79b63);
+}
+
+.secondaryButton {
+  color: #251b16;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(54, 46, 39, 0.12);
+}
+
+.ghostButton {
+  color: #5f4f45;
+  background: transparent;
+  border: 1px solid rgba(54, 46, 39, 0.14);
+}
+
+.grid2,
+.grid3 {
+  display: grid;
+  gap: 12px;
+}
+
+.grid2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sectionCard,
+.summaryCard,
+.routeCard,
+.scheduleCard {
+  padding: 18px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sectionLabel {
+  margin-bottom: 8px;
+  color: #8a6c5b;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: #231913;
+  font-size: 1.08rem;
+}
+
+.sectionText,
+.cardText {
+  margin: 0;
+  color: #65574e;
+  line-height: 1.6;
+}
+
+.routeList,
+.runList,
+.workflowList,
+.agentList,
+.knowledgeList,
+.toolList,
+.webhookList {
+  display: grid;
+  gap: 10px;
+}
+
+.routeCard,
+.summaryCard {
+  border-radius: 22px;
+}
+
+.routeTitle,
+.cardTitle {
+  margin: 0;
+  color: #1f1712;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(47, 61, 84, 0.06);
+  color: #5f5147;
+  font-size: 0.78rem;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.muted {
+  color: #7e6d61;
+  font-size: 0.84rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(54, 46, 39, 0.12);
+  background: rgba(255, 255, 255, 0.76);
+  color: #221813;
+  padding: 12px 14px;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.fieldLabel {
+  color: #6d5d54;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(54, 46, 39, 0.14);
+  background: rgba(255, 255, 255, 0.68);
+  color: #6b5d53;
+  font-size: 0.82rem;
+}
+
+.listItem {
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(54, 46, 39, 0.1);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+@media (max-width: 1100px) {
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}

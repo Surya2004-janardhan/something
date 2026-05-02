@@ -1,26 +1,36 @@
 import { createClient } from 'redis';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Force load .env from the root directory to ensure variables are available
+dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 
 const redisConfig: any = {
   socket: {
-    host: process.env.REDIS_HOST || 'localhost',
-    port: Number(process.env.REDIS_PORT) || 6379,
-  }
+    host: process.env.REDIS_HOST || 'redis-18818.crce206.ap-south-1-1.ec2.cloud.redislabs.com',
+    port: Number(process.env.REDIS_PORT) || 18818,
+    reconnectStrategy: (retries: number) => {
+      if (retries > 10) return new Error('Max retries reached');
+      return Math.min(retries * 50, 1000);
+    }
+  },
+  username: process.env.REDIS_USER || 'default',
+  password: process.env.REDIS_PASS || '2sKFVVtYrfoKUYw2qZz3GzebraPc1Zb1',
 };
 
-if (process.env.REDIS_USER) redisConfig.username = process.env.REDIS_USER;
-if (process.env.REDIS_PASS) redisConfig.password = process.env.REDIS_PASS;
+console.log(`[Redis] Attempting to connect to: ${redisConfig.socket.host}:${redisConfig.socket.port}`);
 
-// Fallback to URL if provided and no separate host is set
-const redisUrl = process.env.REDIS_URL;
-const finalConfig = (redisUrl && !process.env.REDIS_HOST) ? { url: redisUrl } : redisConfig;
-
-export const redisClient = createClient(finalConfig);
+export const redisClient = createClient(redisConfig);
 
 redisClient.on('error', (err) => console.error('[Redis] Client error', err));
 
 export async function connectRedis() {
-  if (!redisClient.isOpen) {
-    await redisClient.connect();
-    console.log('[Redis] Connected to cloud/local');
+  try {
+    if (!redisClient.isOpen) {
+      await redisClient.connect();
+      console.log('[Redis] Connected Successfully to Cloud Redis Labs');
+    }
+  } catch (error) {
+    console.error('[Redis] Connection failed:', error);
   }
 }

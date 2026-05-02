@@ -3,11 +3,22 @@ const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
 const jobsRouter = require("./routes/jobs");
 
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379/0";
 const INTERNAL_API_SECRET = process.env.INTERNAL_API_SECRET || "";
 
 async function createApp() {
-  const redis = createClient({ url: REDIS_URL });
+  const redisConfig = {
+    socket: {
+      host: process.env.REDIS_HOST || 'localhost',
+      port: Number(process.env.REDIS_PORT) || 6379,
+    },
+    username: process.env.REDIS_USER || 'default',
+    password: process.env.REDIS_PASS || '',
+  };
+
+  const redisUrl = process.env.REDIS_URL;
+  const finalConfig = (redisUrl && !process.env.REDIS_HOST) ? { url: redisUrl } : redisConfig;
+
+  const redis = createClient(finalConfig);
   redis.on("error", (err) => console.error("[ai-worker][redis] error", err));
   await redis.connect();
 

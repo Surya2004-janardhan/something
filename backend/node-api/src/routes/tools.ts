@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { auth } from '../middleware/auth';
+import { authenticate } from '../middleware/auth';
 import prisma from '../lib/prisma';
 import { JwtPayload } from '../types/express';
 
@@ -94,7 +94,7 @@ const BUILT_IN_TOOLS = [
 ];
 
 // List available tools
-router.get('/', auth, async (req: Request, res: Response) => {
+router.get('/', authenticate, async (req: Request, res: Response) => {
   try {
     const userId = (req.user as JwtPayload).id;
 
@@ -115,7 +115,7 @@ router.get('/', auth, async (req: Request, res: Response) => {
 });
 
 // Register custom tool
-router.post('/', auth, async (req: Request, res: Response) => {
+router.post('/', authenticate, async (req: Request, res: Response) => {
   try {
     const userId = (req.user as JwtPayload).id;
     const { name, description, category, config } = req.body;
@@ -131,7 +131,7 @@ router.post('/', auth, async (req: Request, res: Response) => {
 });
 
 // Update tool
-router.patch('/:toolId', auth, async (req: Request, res: Response) => {
+router.patch('/:toolId', authenticate, async (req: Request, res: Response) => {
   try {
     const { toolId } = req.params;
     const userId = (req.user as JwtPayload).id;
@@ -262,7 +262,7 @@ router.post('/:toolId/execute', async (req: Request, res: Response) => {
 });
 
 // Get tool usage history
-router.get('/:toolId/usage', auth, async (req: Request, res: Response) => {
+router.get('/:toolId/usage', authenticate, async (req: Request, res: Response) => {
   try {
     const { toolId } = req.params;
     const userId = (req.user as JwtPayload).id;
@@ -294,7 +294,7 @@ router.get('/:toolId/usage', auth, async (req: Request, res: Response) => {
 });
 
 // Delete tool
-router.delete('/:toolId', auth, async (req: Request, res: Response) => {
+router.delete('/:toolId', authenticate, async (req: Request, res: Response) => {
   try {
     const { toolId } = req.params;
     const userId = (req.user as JwtPayload).id;
